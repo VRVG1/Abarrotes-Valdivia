@@ -1,5 +1,18 @@
 # Abarrotes-Valdivia
 Desarrollo de la aplicación que va a conectar con la base de datos de la tienda Abarrotes Valdivia.
+<<<<<<< HEAD
 Jajaja pito
 
 pito maestro
+=======
+<<<<<<< HEAD
+culoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculo
+culoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculo
+culoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculo
+culoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculo
+culoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculoculo
+=======
+
+Cambio hecho por Pedro.
+>>>>>>> 09a330efed6f2f9bc948a637ce2232faa3104d0a
+>>>>>>> d72f40db3699d37ba4f3b62b7bf2284cb1c551f7
