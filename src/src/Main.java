@@ -6,8 +6,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
@@ -22,6 +21,7 @@ public class Main extends javax.swing.JFrame {
     static double cambio;
     static int contGlobal = 0, contDiaVenta = 0, codeProducto;
     static Producto producto= null;
+    static CardLayout cardLayout;
     
     DefaultListModel<Producto> model;
     DefaultListModel<Producto> model2;
@@ -42,13 +42,22 @@ public class Main extends javax.swing.JFrame {
         model3 = new DefaultListModel<Producto>();
         listBuscar.setModel(model);
         ListaSeleccionada.setModel(model2);
+        cardLayout = (CardLayout)PanelCardLayout.getLayout();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelMain = new javax.swing.JPanel();
+        panelGestionar = new javax.swing.JPanel();
+        btnGesVentas = new javax.swing.JButton();
+        btnGesCompras = new javax.swing.JButton();
+        btnGesAlmacen = new javax.swing.JButton();
+        labelGestionar = new javax.swing.JLabel();
+        btnGesClientes = new javax.swing.JButton();
+        btnGesProveedor = new javax.swing.JButton();
+        PanelCardLayout = new javax.swing.JPanel();
+        panelVentas = new javax.swing.JPanel();
         labelWarning = new javax.swing.JLabel();
         txtPago = new javax.swing.JTextField();
         txtCambio = new javax.swing.JTextField();
@@ -75,6 +84,14 @@ public class Main extends javax.swing.JFrame {
         btnModification = new javax.swing.JButton();
         btnVentasVisual = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        panelCompras = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        panelAlmacen = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        panelClientes = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        panelProveedores = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Version 1.3");
@@ -87,10 +104,87 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        panelMain.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnGesVentas.setText("Ventas");
+        btnGesVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGesVentasActionPerformed(evt);
+            }
+        });
+
+        btnGesCompras.setText("Compras");
+        btnGesCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGesComprasActionPerformed(evt);
+            }
+        });
+
+        btnGesAlmacen.setText("Almacen");
+        btnGesAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGesAlmacenActionPerformed(evt);
+            }
+        });
+
+        labelGestionar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labelGestionar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGestionar.setText("Gestionar");
+
+        btnGesClientes.setText("Clientes");
+        btnGesClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGesClientesActionPerformed(evt);
+            }
+        });
+
+        btnGesProveedor.setText("Proveedores");
+        btnGesProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGesProveedorActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelGestionarLayout = new javax.swing.GroupLayout(panelGestionar);
+        panelGestionar.setLayout(panelGestionarLayout);
+        panelGestionarLayout.setHorizontalGroup(
+            panelGestionarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGestionarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelGestionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(panelGestionarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelGestionarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGesVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGesCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGesAlmacen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGesClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGesProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelGestionarLayout.setVerticalGroup(
+            panelGestionarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGestionarLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(labelGestionar)
+                .addGap(36, 36, 36)
+                .addComponent(btnGesVentas)
+                .addGap(18, 18, 18)
+                .addComponent(btnGesCompras)
+                .addGap(18, 18, 18)
+                .addComponent(btnGesAlmacen)
+                .addGap(18, 18, 18)
+                .addComponent(btnGesClientes)
+                .addGap(18, 18, 18)
+                .addComponent(btnGesProveedor)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PanelCardLayout.setLayout(new java.awt.CardLayout());
+
+        panelVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelWarning.setText("No se permiten letras");
-        panelMain.add(labelWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
+        panelVentas.add(labelWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, -1, -1));
 
         txtPago.setText("$ ");
         txtPago.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,10 +197,10 @@ public class Main extends javax.swing.JFrame {
                 txtPagoKeyTyped(evt);
             }
         });
-        panelMain.add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 554, -1));
+        panelVentas.add(txtPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 554, -1));
 
         txtCambio.setText("$ ");
-        panelMain.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 554, -1));
+        panelVentas.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, 554, -1));
 
         btnCobrar.setText("Cambio");
         btnCobrar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +208,7 @@ public class Main extends javax.swing.JFrame {
                 btnCobrarActionPerformed(evt);
             }
         });
-        panelMain.add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 554, -1));
+        panelVentas.add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 554, -1));
 
         searchBar.setText("Buscar");
         searchBar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -122,17 +216,17 @@ public class Main extends javax.swing.JFrame {
                 searchBarKeyTyped(evt);
             }
         });
-        panelMain.add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 10, 560, -1));
+        panelVentas.add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 10, 560, -1));
 
         ListaSeleccionada.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scrollSeleccionado.setViewportView(ListaSeleccionada);
 
-        panelMain.add(scrollSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 540, 470));
+        panelVentas.add(scrollSeleccionado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 540, 470));
 
         listBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         scrollBuscar.setViewportView(listBuscar);
 
-        panelMain.add(scrollBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 610, 445));
+        panelVentas.add(scrollBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 610, 445));
 
         btnClean.setText("X");
         btnClean.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +234,7 @@ public class Main extends javax.swing.JFrame {
                 btnCleanActionPerformed(evt);
             }
         });
-        panelMain.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 10, 40, 30));
+        panelVentas.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 10, 40, 30));
 
         btnSaveExit.setText("Salir y Guardar");
         btnSaveExit.setMaximumSize(new java.awt.Dimension(84, 32));
@@ -151,7 +245,7 @@ public class Main extends javax.swing.JFrame {
                 btnSaveExitActionPerformed(evt);
             }
         });
-        panelMain.add(btnSaveExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 650, 120, 30));
+        panelVentas.add(btnSaveExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 650, 120, 30));
 
         btnAgregarlist2.setText("Agregar");
         btnAgregarlist2.addActionListener(new java.awt.event.ActionListener() {
@@ -159,12 +253,12 @@ public class Main extends javax.swing.JFrame {
                 btnAgregarlist2ActionPerformed(evt);
             }
         });
-        panelMain.add(btnAgregarlist2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 80, -1));
+        panelVentas.add(btnAgregarlist2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 80, -1));
 
         labelMatches.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelMatches.setForeground(new java.awt.Color(255, 0, 0));
         labelMatches.setText("Producto no encontrado");
-        panelMain.add(labelMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(857, 490, 170, -1));
+        panelVentas.add(labelMatches, new org.netbeans.lib.awtextra.AbsoluteConstraints(857, 490, 170, -1));
 
         btnQuitar.setText("Quitar");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,14 +266,14 @@ public class Main extends javax.swing.JFrame {
                 btnQuitarActionPerformed(evt);
             }
         });
-        panelMain.add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 80, -1));
+        panelVentas.add(btnQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 80, -1));
 
         labelTotal.setText("Total");
-        panelMain.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
+        panelVentas.add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, -1, -1));
 
         txtTotal.setEditable(false);
         txtTotal.setText("$");
-        panelMain.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 484, 500, 30));
+        panelVentas.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 484, 500, 30));
 
         btnTotal.setText("Cobrar");
         btnTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +281,7 @@ public class Main extends javax.swing.JFrame {
                 btnTotalActionPerformed(evt);
             }
         });
-        panelMain.add(btnTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 80, -1));
+        panelVentas.add(btnTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 80, -1));
 
         btnNewC.setText("Nuevo Cliente");
         btnNewC.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +289,7 @@ public class Main extends javax.swing.JFrame {
                 btnNewCActionPerformed(evt);
             }
         });
-        panelMain.add(btnNewC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 560, -1));
+        panelVentas.add(btnNewC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 640, 560, -1));
 
         btnMas.setText("Agregar Frutas/Verduras/Queso");
         btnMas.addActionListener(new java.awt.event.ActionListener() {
@@ -203,13 +297,13 @@ public class Main extends javax.swing.JFrame {
                 btnMasActionPerformed(evt);
             }
         });
-        panelMain.add(btnMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 220, -1));
+        panelVentas.add(btnMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 220, -1));
 
         jLabel1.setText("Pago");
-        panelMain.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, -1, -1));
+        panelVentas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 540, -1, -1));
 
         jLabel2.setText("Cambio");
-        panelMain.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 610, -1, -1));
+        panelVentas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 610, -1, -1));
 
         btnDelete.setText("Eliminar Producto");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -217,7 +311,7 @@ public class Main extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        panelMain.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 510, 180, -1));
+        panelVentas.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 510, 180, -1));
 
         btnAdd.setText("Agregar Producto");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +319,7 @@ public class Main extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        panelMain.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 180, -1));
+        panelVentas.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 510, 180, -1));
 
         btnModification.setText("Modificar Producto");
         btnModification.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +327,7 @@ public class Main extends javax.swing.JFrame {
                 btnModificationActionPerformed(evt);
             }
         });
-        panelMain.add(btnModification, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 180, -1));
+        panelVentas.add(btnModification, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 510, 180, -1));
 
         btnVentasVisual.setText("Ventas");
         btnVentasVisual.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +335,7 @@ public class Main extends javax.swing.JFrame {
                 btnVentasVisualActionPerformed(evt);
             }
         });
-        panelMain.add(btnVentasVisual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, 120, -1));
+        panelVentas.add(btnVentasVisual, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, 120, -1));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -249,17 +343,107 @@ public class Main extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        panelMain.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 650, -1, -1));
+        panelVentas.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 650, -1, -1));
+
+        PanelCardLayout.add(panelVentas, "Ventas");
+
+        jLabel6.setText("Panel Compras, borrar este label");
+
+        javax.swing.GroupLayout panelComprasLayout = new javax.swing.GroupLayout(panelCompras);
+        panelCompras.setLayout(panelComprasLayout);
+        panelComprasLayout.setHorizontalGroup(
+            panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelComprasLayout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jLabel6)
+                .addContainerGap(1001, Short.MAX_VALUE))
+        );
+        panelComprasLayout.setVerticalGroup(
+            panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelComprasLayout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(jLabel6)
+                .addContainerGap(395, Short.MAX_VALUE))
+        );
+
+        PanelCardLayout.add(panelCompras, "Compras");
+
+        jLabel5.setText("Panel Almacen, borrar este label");
+
+        javax.swing.GroupLayout panelAlmacenLayout = new javax.swing.GroupLayout(panelAlmacen);
+        panelAlmacen.setLayout(panelAlmacenLayout);
+        panelAlmacenLayout.setHorizontalGroup(
+            panelAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAlmacenLayout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jLabel5)
+                .addContainerGap(1003, Short.MAX_VALUE))
+        );
+        panelAlmacenLayout.setVerticalGroup(
+            panelAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAlmacenLayout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(jLabel5)
+                .addContainerGap(395, Short.MAX_VALUE))
+        );
+
+        PanelCardLayout.add(panelAlmacen, "Almacen");
+
+        jLabel4.setText("Panel Clientes, borrar este label");
+
+        javax.swing.GroupLayout panelClientesLayout = new javax.swing.GroupLayout(panelClientes);
+        panelClientes.setLayout(panelClientesLayout);
+        panelClientesLayout.setHorizontalGroup(
+            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jLabel4)
+                .addContainerGap(1007, Short.MAX_VALUE))
+        );
+        panelClientesLayout.setVerticalGroup(
+            panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelClientesLayout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(jLabel4)
+                .addContainerGap(395, Short.MAX_VALUE))
+        );
+
+        PanelCardLayout.add(panelClientes, "Clientes");
+
+        jLabel3.setText("Panel Proveedores, borrar este label");
+
+        javax.swing.GroupLayout panelProveedoresLayout = new javax.swing.GroupLayout(panelProveedores);
+        panelProveedores.setLayout(panelProveedoresLayout);
+        panelProveedoresLayout.setHorizontalGroup(
+            panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                .addGap(325, 325, 325)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(781, Short.MAX_VALUE))
+        );
+        panelProveedoresLayout.setVerticalGroup(
+            panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProveedoresLayout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(jLabel3)
+                .addContainerGap(441, Short.MAX_VALUE))
+        );
+
+        PanelCardLayout.add(panelProveedores, "Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelGestionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PanelCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelMain, javax.swing.GroupLayout.PREFERRED_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(PanelCardLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelGestionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -529,6 +713,26 @@ public class Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtPagoMouseClicked
+
+    private void btnGesVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesVentasActionPerformed
+        cardLayout.show(PanelCardLayout, "Ventas");
+    }//GEN-LAST:event_btnGesVentasActionPerformed
+
+    private void btnGesComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesComprasActionPerformed
+        cardLayout.show(PanelCardLayout, "Compras");
+    }//GEN-LAST:event_btnGesComprasActionPerformed
+
+    private void btnGesAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesAlmacenActionPerformed
+        cardLayout.show(PanelCardLayout, "Almacen");
+    }//GEN-LAST:event_btnGesAlmacenActionPerformed
+
+    private void btnGesClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesClientesActionPerformed
+        cardLayout.show(PanelCardLayout, "Clientes");
+    }//GEN-LAST:event_btnGesClientesActionPerformed
+
+    private void btnGesProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesProveedorActionPerformed
+        cardLayout.show(PanelCardLayout, "Proveedores");
+    }//GEN-LAST:event_btnGesProveedorActionPerformed
     /*-----------------------METODOS-----------------------------------------*/
     /*----------------ValidatDouble------------------------------------------*/
     public double validarInt(String validacion){
@@ -688,11 +892,17 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<Producto> ListaSeleccionada;
+    private javax.swing.JPanel PanelCardLayout;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAgregarlist2;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnGesAlmacen;
+    private javax.swing.JButton btnGesClientes;
+    private javax.swing.JButton btnGesCompras;
+    private javax.swing.JButton btnGesProveedor;
+    private javax.swing.JButton btnGesVentas;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnMas;
     private javax.swing.JButton btnModification;
@@ -703,11 +913,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnVentasVisual;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelGestionar;
     private javax.swing.JLabel labelMatches;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelWarning;
     private javax.swing.JList<Producto> listBuscar;
-    private javax.swing.JPanel panelMain;
+    private javax.swing.JPanel panelAlmacen;
+    private javax.swing.JPanel panelClientes;
+    private javax.swing.JPanel panelCompras;
+    private javax.swing.JPanel panelGestionar;
+    private javax.swing.JPanel panelProveedores;
+    private javax.swing.JPanel panelVentas;
     private javax.swing.JScrollPane scrollBuscar;
     private javax.swing.JScrollPane scrollSeleccionado;
     private javax.swing.JTextField searchBar;
