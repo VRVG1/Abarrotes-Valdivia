@@ -9,17 +9,27 @@ package src;
  *
  * @author pnrv2
  */
-public class IngresoDialog extends javax.swing.JDialog {
+import java.awt.Color;
+import javax.swing.border.Border;
+import javax.swing.JComponent;
+import javax.swing.plaf.basic.BasicBorders;
 
+public class IngresoDialog extends javax.swing.JDialog {
+    
+    private Border[] bordes;
+    
     private String user = "Admin";
     private String password = "12345";
     
+    private boolean successLogIn;
     /**
      * Creates new form IngresoDialog
      */
     public IngresoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        successLogIn = false;
+        bordes = new Border[2];
     }
 
     /**
@@ -32,24 +42,41 @@ public class IngresoDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        fieldUser = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        fieldPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnIngreso = new javax.swing.JButton();
-        errorIngreso = new javax.swing.JLabel();
+        errorLogIn = new javax.swing.JLabel();
+        btnLogIn = new javax.swing.JButton();
+        fieldUser = new javax.swing.JTextField();
+        fieldPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Log In");
+        setLocation((int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth()-403)/2), (int) ((java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight()-256)/2));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
-        jLabel1.setText("Usuario:");
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Abarrotes Valdivia");
 
-        fieldUser.setText("Ingrese usuario");
+        jLabel2.setText("Usuario:");
+
+        jLabel3.setText("Contraseña:");
+
+        errorLogIn.setForeground(new java.awt.Color(255, 0, 0));
+
+        btnLogIn.setText("Ingresar");
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
+
+        fieldUser.setText("Ingrese su usuario");
         fieldUser.setFocusable(false);
         fieldUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -57,112 +84,103 @@ public class IngresoDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Contraseña:");
-
-        fieldPassword.setText("Ingrese contraseña");
-        fieldPassword.setFocusable(false);
-        fieldPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+        fieldPass.setText("Ingrese su contraseña");
+        fieldPass.setToolTipText("");
+        fieldPass.setFocusable(false);
+        fieldPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                fieldPasswordMouseClicked(evt);
+                fieldPassMouseClicked(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Abarrotes Valdivia");
-
-        btnIngreso.setText("Ingresar");
-        btnIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresoActionPerformed(evt);
-            }
-        });
-
-        errorIngreso.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(errorIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(fieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(btnIngreso)))))
-                        .addGap(0, 12, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fieldUser)
+                            .addComponent(errorLogIn)
+                            .addComponent(fieldPass, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogIn)
+                .addGap(162, 162, 162))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(fieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(errorIngreso)
+                    .addComponent(fieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(fieldPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnIngreso)
-                .addGap(20, 20, 20))
+                .addComponent(errorLogIn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnLogIn)
+                .addGap(14, 14, 14))
         );
+
+        fieldPass.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresoActionPerformed
-        String inputFieldUser = fieldUser.getText();
-        String inputFieldPass = fieldPassword.getText();
-        
-        if(!inputFieldUser.equals(user) || !inputFieldPass.equals(password)){
-            errorIngreso.setText("Usuario o contraseña incorrecto.");
-        }
-        
-        if(inputFieldUser.equals(user) && inputFieldPass.equals(password)){
-            
-        }
-    }//GEN-LAST:event_btnIngresoActionPerformed
-
     private void fieldUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldUserMouseClicked
-        fieldUser.setText("");
+        fieldUser.setBorder(bordes[0]);
         fieldUser.setFocusable(true);
-        fieldPassword.setFocusable(true);
+        fieldUser.setText("");
+        fieldPass.setFocusable(true);
+        errorLogIn.setText("");
     }//GEN-LAST:event_fieldUserMouseClicked
 
-    private void fieldPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldPasswordMouseClicked
-        fieldPassword.setText("");
-    }//GEN-LAST:event_fieldPasswordMouseClicked
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+        bordes[0] = fieldUser.getBorder();
+        bordes[1] = fieldPass.getBorder();
+        
+        String inputFieldUser = fieldUser.getText();
+        String inputFieldPass = String.valueOf(fieldPass.getPassword());
+        if(inputFieldUser.equals(user) && inputFieldPass.equals(password)){
+            Main.succesLogIn = true;
+            this.dispose();
+        }else{
+            fieldUser.setBorder(new BasicBorders.FieldBorder(Color.RED, Color.RED, Color.RED, Color.RED));
+            fieldPass.setBorder(new BasicBorders.FieldBorder(Color.RED, Color.RED, Color.RED, Color.RED));
+            errorLogIn.setText("El usuario o contraseña son incorrectos");
+        }
+    }//GEN-LAST:event_btnLogInActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowClosed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
+        Main.terminarPrograma();
+    }//GEN-LAST:event_formWindowClosing
 
+    private void fieldPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fieldPassMouseClicked
+        fieldPass.setBorder(bordes[1]);
+        fieldPass.setText("");
+    }//GEN-LAST:event_fieldPassMouseClicked
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIngreso;
-    private javax.swing.JLabel errorIngreso;
-    private javax.swing.JTextField fieldPassword;
+    private javax.swing.JButton btnLogIn;
+    private javax.swing.JLabel errorLogIn;
+    private javax.swing.JPasswordField fieldPass;
     private javax.swing.JTextField fieldUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
