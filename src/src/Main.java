@@ -25,7 +25,10 @@ public class Main extends javax.swing.JFrame {
     DefaultListModel<Producto> model2;
     DefaultListModel<Producto> model3;
     
+    private IngresoDialog ingreso;
+    
     public Main() {
+        
         initComponents();
         this.setResizable(false);
         this.setSize(1280, 720);
@@ -40,6 +43,9 @@ public class Main extends javax.swing.JFrame {
         model3 = new DefaultListModel<Producto>();
         listBuscar.setModel(model);
         ListaSeleccionada.setModel(model2);
+        
+        ingreso = new IngresoDialog(this, true);
+        ingreso.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -278,6 +284,8 @@ public class Main extends javax.swing.JFrame {
         }
         //System.out.println(contGlobal);
         printListBuscar();
+        
+        ingreso.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnVentasVisualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasVisualActionPerformed
