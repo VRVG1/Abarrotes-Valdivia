@@ -143,6 +143,14 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="panelVentas">
+          <Properties>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1450, 682]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1450, 682]"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="Ventas"/>
@@ -498,7 +506,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1001" max="32767" attributes="0"/>
+                      <EmptySpace pref="1122" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -533,7 +541,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1003" max="32767" attributes="0"/>
+                      <EmptySpace pref="1124" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -568,7 +576,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="1007" max="32767" attributes="0"/>
+                      <EmptySpace pref="1128" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -603,7 +611,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="325" max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" pref="223" max="-2" attributes="0"/>
-                      <EmptySpace pref="781" max="32767" attributes="0"/>
+                      <EmptySpace pref="902" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

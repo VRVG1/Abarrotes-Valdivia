@@ -30,7 +30,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setResizable(false);
-        this.setSize(1280, 720);
+        this.setSize(1450, 720);
         searchBar.requestFocus();
         labelWarning.setVisible(false);
         labelWarning.setForeground(Color.red);
@@ -181,6 +181,8 @@ public class Main extends javax.swing.JFrame {
 
         PanelCardLayout.setLayout(new java.awt.CardLayout());
 
+        panelVentas.setMinimumSize(new java.awt.Dimension(1450, 682));
+        panelVentas.setPreferredSize(new java.awt.Dimension(1450, 682));
         panelVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelWarning.setText("No se permiten letras");
@@ -356,7 +358,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelComprasLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(jLabel6)
-                .addContainerGap(1001, Short.MAX_VALUE))
+                .addContainerGap(1122, Short.MAX_VALUE))
         );
         panelComprasLayout.setVerticalGroup(
             panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,7 +379,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelAlmacenLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(jLabel5)
-                .addContainerGap(1003, Short.MAX_VALUE))
+                .addContainerGap(1124, Short.MAX_VALUE))
         );
         panelAlmacenLayout.setVerticalGroup(
             panelAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +400,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(jLabel4)
-                .addContainerGap(1007, Short.MAX_VALUE))
+                .addContainerGap(1128, Short.MAX_VALUE))
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -419,7 +421,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelProveedoresLayout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(781, Short.MAX_VALUE))
+                .addContainerGap(902, Short.MAX_VALUE))
         );
         panelProveedoresLayout.setVerticalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
