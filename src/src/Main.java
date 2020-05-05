@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.awt.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
 
 public class Main extends javax.swing.JFrame {
@@ -22,10 +23,13 @@ public class Main extends javax.swing.JFrame {
     static int contGlobal = 0, contDiaVenta = 0, codeProducto;
     static Producto producto= null;
     static CardLayout cardLayout;
+    static String[] cabeceraTablaAlmacen = {"ID", "Nombre", "Precio", "Existencia", "Stock", "Unidad de Medida"};
+    static String[][] datosTemporalesTablaAlmacen = {{"1","Pepsi", "20", "10", "10", "Empaquetado"}, {"2","Sabritas", "13", "5", "10", "Empaquetado"}};
     
     DefaultListModel<Producto> model;
     DefaultListModel<Producto> model2;
     DefaultListModel<Producto> model3;
+    DefaultTableModel modeloTablaAlmacen;
     
     public Main() {
         initComponents();
@@ -40,6 +44,16 @@ public class Main extends javax.swing.JFrame {
         model = new DefaultListModel<Producto>();
         model2 = new DefaultListModel<Producto>();
         model3 = new DefaultListModel<Producto>();
+        
+        btnGroupAlmacen.add(btnRadioID);
+        btnGroupAlmacen.add(btnRadioNombre);
+        btnGroupAlmacen.add(btnRadioPrecio);
+        btnGroupAlmacen.add(btnRadioCantidad);
+        
+        modeloTablaAlmacen = new DefaultTableModel(datosTemporalesTablaAlmacen,cabeceraTablaAlmacen);
+        tablaAlmacen.setModel(modeloTablaAlmacen);
+        tablaAlmacen.getTableHeader().setReorderingAllowed(false);
+        
         listBuscar.setModel(model);
         ListaSeleccionada.setModel(model2);
         cardLayout = (CardLayout)PanelCardLayout.getLayout();
@@ -49,6 +63,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupAlmacen = new javax.swing.ButtonGroup();
         panelGestionar = new javax.swing.JPanel();
         btnGesVentas = new javax.swing.JButton();
         btnGesCompras = new javax.swing.JButton();
@@ -87,7 +102,30 @@ public class Main extends javax.swing.JFrame {
         panelCompras = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         panelAlmacen = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAlmacen = new javax.swing.JTable();
+        btnAlmacenAgregar = new javax.swing.JButton();
+        btnAlmacenEliminar = new javax.swing.JButton();
+        btnAlmacenModificar = new javax.swing.JButton();
+        btnAlmacenConsultar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btnRadioCantidad = new javax.swing.JRadioButton();
+        btnRadioID = new javax.swing.JRadioButton();
+        btnRadioNombre = new javax.swing.JRadioButton();
+        btnRadioPrecio = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        labelAlmacenUM = new javax.swing.JLabel();
+        labelAlmacenStock = new javax.swing.JLabel();
+        labelAlmacenExistencia = new javax.swing.JLabel();
+        labelAlmacenPrecio = new javax.swing.JLabel();
+        labelAlmacenNombre = new javax.swing.JLabel();
+        txtExistencia = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        txtStock = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        labelTituloAlmacen = new javax.swing.JLabel();
+        btnConfirmarAlmacen = new javax.swing.JButton();
+        comboBoxAlmacenUM = new javax.swing.JComboBox<>();
         panelClientes = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         panelProveedores = new javax.swing.JPanel();
@@ -370,24 +408,109 @@ public class Main extends javax.swing.JFrame {
 
         PanelCardLayout.add(panelCompras, "Compras");
 
-        jLabel5.setText("Panel Almacen, borrar este label");
+        panelAlmacen.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelAlmacenLayout = new javax.swing.GroupLayout(panelAlmacen);
-        panelAlmacen.setLayout(panelAlmacenLayout);
-        panelAlmacenLayout.setHorizontalGroup(
-            panelAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAlmacenLayout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jLabel5)
-                .addContainerGap(1124, Short.MAX_VALUE))
-        );
-        panelAlmacenLayout.setVerticalGroup(
-            panelAlmacenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelAlmacenLayout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jLabel5)
-                .addContainerGap(395, Short.MAX_VALUE))
-        );
+        tablaAlmacen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaAlmacen);
+
+        panelAlmacen.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 100, 660, 510));
+
+        btnAlmacenAgregar.setText("Agregar");
+        btnAlmacenAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlmacenAgregarActionPerformed(evt);
+            }
+        });
+        panelAlmacen.add(btnAlmacenAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, -1));
+
+        btnAlmacenEliminar.setText("Eliminar");
+        panelAlmacen.add(btnAlmacenEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 90, -1));
+
+        btnAlmacenModificar.setText("Modificar");
+        panelAlmacen.add(btnAlmacenModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 90, -1));
+
+        btnAlmacenConsultar.setText("Consultar");
+        panelAlmacen.add(btnAlmacenConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 90, -1));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("GESTIONAR COMPRAS");
+        panelAlmacen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 220, 50));
+
+        btnRadioCantidad.setText("Cantidad");
+        panelAlmacen.add(btnRadioCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+
+        btnRadioID.setText("ID");
+        panelAlmacen.add(btnRadioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+
+        btnRadioNombre.setText("Nombre");
+        panelAlmacen.add(btnRadioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+
+        btnRadioPrecio.setText("Precio");
+        panelAlmacen.add(btnRadioPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        jLabel7.setText("Filtrar por:");
+        panelAlmacen.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        labelAlmacenUM.setText("Unidad de medida");
+        panelAlmacen.add(labelAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 110, -1));
+
+        labelAlmacenStock.setText("Stock");
+        panelAlmacen.add(labelAlmacenStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 110, -1));
+
+        labelAlmacenExistencia.setText("Existencia");
+        panelAlmacen.add(labelAlmacenExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 110, -1));
+
+        labelAlmacenPrecio.setText("Precio");
+        panelAlmacen.add(labelAlmacenPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 110, -1));
+
+        labelAlmacenNombre.setText("Nombre");
+        panelAlmacen.add(labelAlmacenNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 110, -1));
+
+        txtExistencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtExistenciaKeyPressed(evt);
+            }
+        });
+        panelAlmacen.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 160, 20));
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyPressed(evt);
+            }
+        });
+        panelAlmacen.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 160, 20));
+
+        txtStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtStockKeyPressed(evt);
+            }
+        });
+        panelAlmacen.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 160, 20));
+        panelAlmacen.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 160, 20));
+
+        labelTituloAlmacen.setText("jLabel8");
+        panelAlmacen.add(labelTituloAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, -1));
+
+        btnConfirmarAlmacen.setText("Confirmar");
+        btnConfirmarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarAlmacenActionPerformed(evt);
+            }
+        });
+        panelAlmacen.add(btnConfirmarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
+
+        comboBoxAlmacenUM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empaquetado", "Kilogramos" }));
+        panelAlmacen.add(comboBoxAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, 160, -1));
 
         PanelCardLayout.add(panelAlmacen, "Almacen");
 
@@ -726,6 +849,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnGesAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesAlmacenActionPerformed
         cardLayout.show(PanelCardLayout, "Almacen");
+        almacenFormaBase();
     }//GEN-LAST:event_btnGesAlmacenActionPerformed
 
     private void btnGesClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesClientesActionPerformed
@@ -735,6 +859,76 @@ public class Main extends javax.swing.JFrame {
     private void btnGesProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesProveedorActionPerformed
         cardLayout.show(PanelCardLayout, "Proveedores");
     }//GEN-LAST:event_btnGesProveedorActionPerformed
+
+    private void btnAlmacenAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenAgregarActionPerformed
+        almacenFormaBase();
+        almacenEditable();
+        labelTituloAlmacen.setText("Agregar");
+    }//GEN-LAST:event_btnAlmacenAgregarActionPerformed
+
+    private void btnConfirmarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarAlmacenActionPerformed
+        boolean confirmacion1 = false, confirmacion2 = true, confirmacion3 = true;
+        switch (labelTituloAlmacen.getText()) {
+            case "Agregar":
+                if (comprobarTXTAlmacen()) {
+                    if(!(Double.valueOf(txtPrecio.getText()) >= 0 && Double.valueOf(txtPrecio.getText()) <= 9999.99)){
+                        JOptionPane.showMessageDialog(this, "El rango del precio tiene que ser de 0 a 9999.99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                        confirmacion1 = true;
+                    }
+                    if (!(Double.valueOf(txtExistencia.getText()) >= 0 && Double.valueOf(txtExistencia.getText()) <= 99)) {
+                        JOptionPane.showMessageDialog(this, "El rango de la existencia tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                        confirmacion2 = true;
+                    }
+                    if (!(Double.valueOf(txtStock.getText()) >= 0 && Double.valueOf(txtStock.getText()) <= 99)) {
+                        JOptionPane.showMessageDialog(this, "El rango del stock tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                        confirmacion3 = true;
+                    }
+                    if (confirmacion1 == true && confirmacion2 == true && confirmacion3 == true) {
+                        String[] datos = {"3", txtNombre.getText(), txtPrecio.getText(), txtExistencia.getText(), txtStock.getText(), comboBoxAlmacenUM.getSelectedItem().toString()};
+                        modeloTablaAlmacen.addRow(datos);
+                    }
+                    
+                } else {
+                    JOptionPane.showMessageDialog(this, "Favor de rellenar todos los campos de texto", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case "Eliminar":
+                break;
+            case "Modificar":
+                break;
+            case "Consultar":
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_btnConfirmarAlmacenActionPerformed
+
+    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
+        char c = evt.getKeyChar();
+        if(c >= 48 && c <= 57) {} 
+        else {
+            JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyPressed
+
+    private void txtExistenciaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaKeyPressed
+        char c = evt.getKeyChar();
+        if(c >= 48 && c <= 57) {} 
+        else {
+            JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtExistenciaKeyPressed
+
+    private void txtStockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyPressed
+        char c = evt.getKeyChar();
+        if(c >= 48 && c <= 57) {} 
+        else {
+            JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockKeyPressed
     /*-----------------------METODOS-----------------------------------------*/
     /*----------------ValidatDouble------------------------------------------*/
     public double validarInt(String validacion){
@@ -859,6 +1053,49 @@ public class Main extends javax.swing.JFrame {
         } catch (IOException e) {
         }
     }
+    /*------------------Metodo para regresar a la fomra base el panel almacen------------------------*/
+    public void almacenFormaBase() {
+        labelTituloAlmacen.setVisible(false);
+        txtNombre.setVisible(false);
+        txtPrecio.setVisible(false);
+        txtExistencia.setVisible(false);
+        txtStock.setVisible(false);
+        comboBoxAlmacenUM.setVisible(false);
+        
+        labelAlmacenExistencia.setVisible(false);
+        labelAlmacenNombre.setVisible(false);
+        labelAlmacenPrecio.setVisible(false);
+        labelAlmacenStock.setVisible(false);
+        labelAlmacenUM.setVisible(false);
+        
+        btnConfirmarAlmacen.setVisible(false);
+        btnConfirmarAlmacen.setEnabled(false);
+    }
+    /*------------------Metodo para poner visible los txt y labels para editar los productos del panel almacen------------------------*/
+    public void almacenEditable() {
+        labelTituloAlmacen.setVisible(true);
+        txtNombre.setVisible(true);
+        txtPrecio.setVisible(true);
+        txtExistencia.setVisible(true);
+        txtStock.setVisible(true);
+        comboBoxAlmacenUM.setVisible(true);
+        
+        labelAlmacenExistencia.setVisible(true);
+        labelAlmacenNombre.setVisible(true);
+        labelAlmacenPrecio.setVisible(true);
+        labelAlmacenStock.setVisible(true);
+        labelAlmacenUM.setVisible(true);
+        
+        btnConfirmarAlmacen.setVisible(true);
+        btnConfirmarAlmacen.setEnabled(true);
+    }
+    /*------------------Metodo para Comprobar si los textos estan vacios del panel almecen------------------------*/
+    public boolean comprobarTXTAlmacen() {
+        System.out.println(txtStock.getText());
+        System.out.println(txtPrecio.getText());
+        return !txtStock.getText().equals("")
+                && !txtPrecio.getText().equals("") && !txtExistencia.getText().equals("") && !txtNombre.getText().equals("");
+    }
     /*--------------------Fin de los metodos----------------------------------*/
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -897,30 +1134,49 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel PanelCardLayout;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAgregarlist2;
+    private javax.swing.JButton btnAlmacenAgregar;
+    private javax.swing.JButton btnAlmacenConsultar;
+    private javax.swing.JButton btnAlmacenEliminar;
+    private javax.swing.JButton btnAlmacenModificar;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnCobrar;
+    private javax.swing.JButton btnConfirmarAlmacen;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGesAlmacen;
     private javax.swing.JButton btnGesClientes;
     private javax.swing.JButton btnGesCompras;
     private javax.swing.JButton btnGesProveedor;
     private javax.swing.JButton btnGesVentas;
+    private javax.swing.ButtonGroup btnGroupAlmacen;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnMas;
     private javax.swing.JButton btnModification;
     private javax.swing.JButton btnNewC;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JRadioButton btnRadioCantidad;
+    private javax.swing.JRadioButton btnRadioID;
+    private javax.swing.JRadioButton btnRadioNombre;
+    private javax.swing.JRadioButton btnRadioPrecio;
     private javax.swing.JButton btnSaveExit;
     private javax.swing.JButton btnTotal;
     private javax.swing.JButton btnVentasVisual;
+    private javax.swing.JComboBox<String> comboBoxAlmacenUM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelAlmacenExistencia;
+    private javax.swing.JLabel labelAlmacenNombre;
+    private javax.swing.JLabel labelAlmacenPrecio;
+    private javax.swing.JLabel labelAlmacenStock;
+    private javax.swing.JLabel labelAlmacenUM;
     private javax.swing.JLabel labelGestionar;
     private javax.swing.JLabel labelMatches;
+    private javax.swing.JLabel labelTituloAlmacen;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelWarning;
     private javax.swing.JList<Producto> listBuscar;
@@ -933,8 +1189,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollBuscar;
     private javax.swing.JScrollPane scrollSeleccionado;
     private javax.swing.JTextField searchBar;
+    private javax.swing.JTable tablaAlmacen;
     private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtExistencia;
+    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPago;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
