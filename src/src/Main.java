@@ -25,6 +25,7 @@ public class Main extends javax.swing.JFrame {
     static CardLayout cardLayout;
     static String[] cabeceraTablaAlmacen = {"ID", "Nombre", "Precio", "Existencia", "Stock", "Unidad de Medida"};
     static String[][] datosTemporalesTablaAlmacen = {{"1","Pepsi", "20", "10", "10", "Empaquetado"}, {"2","Sabritas", "13", "5", "10", "Empaquetado"}};
+    static int tablaAlmacenSeleccionModificar;
     
     DefaultListModel<Producto> model;
     DefaultListModel<Producto> model2;
@@ -53,6 +54,7 @@ public class Main extends javax.swing.JFrame {
         modeloTablaAlmacen = new DefaultTableModel(datosTemporalesTablaAlmacen,cabeceraTablaAlmacen);
         tablaAlmacen.setModel(modeloTablaAlmacen);
         tablaAlmacen.getTableHeader().setReorderingAllowed(false);
+        
         
         listBuscar.setModel(model);
         ListaSeleccionada.setModel(model2);
@@ -126,6 +128,8 @@ public class Main extends javax.swing.JFrame {
         labelTituloAlmacen = new javax.swing.JLabel();
         btnConfirmarAlmacen = new javax.swing.JButton();
         comboBoxAlmacenUM = new javax.swing.JComboBox<>();
+        txtAlmacenBuscar = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         panelClientes = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         panelProveedores = new javax.swing.JPanel();
@@ -434,12 +438,27 @@ public class Main extends javax.swing.JFrame {
         panelAlmacen.add(btnAlmacenAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 90, -1));
 
         btnAlmacenEliminar.setText("Eliminar");
+        btnAlmacenEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlmacenEliminarActionPerformed(evt);
+            }
+        });
         panelAlmacen.add(btnAlmacenEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 90, -1));
 
         btnAlmacenModificar.setText("Modificar");
+        btnAlmacenModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlmacenModificarActionPerformed(evt);
+            }
+        });
         panelAlmacen.add(btnAlmacenModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 90, -1));
 
         btnAlmacenConsultar.setText("Consultar");
+        btnAlmacenConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlmacenConsultarActionPerformed(evt);
+            }
+        });
         panelAlmacen.add(btnAlmacenConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 90, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -447,59 +466,59 @@ public class Main extends javax.swing.JFrame {
         panelAlmacen.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 10, 220, 50));
 
         btnRadioCantidad.setText("Cantidad");
-        panelAlmacen.add(btnRadioCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        panelAlmacen.add(btnRadioCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 320, -1, -1));
 
         btnRadioID.setText("ID");
-        panelAlmacen.add(btnRadioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
+        panelAlmacen.add(btnRadioID, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 200, -1, -1));
 
         btnRadioNombre.setText("Nombre");
-        panelAlmacen.add(btnRadioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        panelAlmacen.add(btnRadioNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 240, -1, -1));
 
         btnRadioPrecio.setText("Precio");
-        panelAlmacen.add(btnRadioPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+        panelAlmacen.add(btnRadioPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 280, -1, -1));
 
         jLabel7.setText("Filtrar por:");
-        panelAlmacen.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        panelAlmacen.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 170, -1, -1));
 
         labelAlmacenUM.setText("Unidad de medida");
-        panelAlmacen.add(labelAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 110, -1));
+        panelAlmacen.add(labelAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 110, -1));
 
         labelAlmacenStock.setText("Stock");
-        panelAlmacen.add(labelAlmacenStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 110, -1));
+        panelAlmacen.add(labelAlmacenStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 110, -1));
 
         labelAlmacenExistencia.setText("Existencia");
-        panelAlmacen.add(labelAlmacenExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 110, -1));
+        panelAlmacen.add(labelAlmacenExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 110, -1));
 
         labelAlmacenPrecio.setText("Precio");
-        panelAlmacen.add(labelAlmacenPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 110, -1));
+        panelAlmacen.add(labelAlmacenPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 110, -1));
 
         labelAlmacenNombre.setText("Nombre");
-        panelAlmacen.add(labelAlmacenNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 110, -1));
+        panelAlmacen.add(labelAlmacenNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 110, -1));
 
         txtExistencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtExistenciaKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtExistenciaKeyTyped(evt);
             }
         });
-        panelAlmacen.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 510, 160, 20));
+        panelAlmacen.add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 160, 30));
 
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtPrecioKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
             }
         });
-        panelAlmacen.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 480, 160, 20));
+        panelAlmacen.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 160, 30));
 
         txtStock.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtStockKeyPressed(evt);
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockKeyTyped(evt);
             }
         });
-        panelAlmacen.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, 160, 20));
-        panelAlmacen.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 160, 20));
+        panelAlmacen.add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, 160, 30));
+        panelAlmacen.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 160, 30));
 
         labelTituloAlmacen.setText("jLabel8");
-        panelAlmacen.add(labelTituloAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, -1));
+        panelAlmacen.add(labelTituloAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         btnConfirmarAlmacen.setText("Confirmar");
         btnConfirmarAlmacen.addActionListener(new java.awt.event.ActionListener() {
@@ -507,10 +526,14 @@ public class Main extends javax.swing.JFrame {
                 btnConfirmarAlmacenActionPerformed(evt);
             }
         });
-        panelAlmacen.add(btnConfirmarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 610, -1, -1));
+        panelAlmacen.add(btnConfirmarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, -1, -1));
 
         comboBoxAlmacenUM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empaquetado", "Kilogramos" }));
-        panelAlmacen.add(comboBoxAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, 160, -1));
+        panelAlmacen.add(comboBoxAlmacenUM, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 160, -1));
+        panelAlmacen.add(txtAlmacenBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 114, 300, 30));
+
+        jLabel8.setText("Buscar");
+        panelAlmacen.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 120, -1, -1));
 
         PanelCardLayout.add(panelAlmacen, "Almacen");
 
@@ -867,27 +890,36 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlmacenAgregarActionPerformed
 
     private void btnConfirmarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarAlmacenActionPerformed
-        boolean confirmacion1 = false, confirmacion2 = true, confirmacion3 = true;
+        boolean confirmacion1 = true, confirmacion2 = true, confirmacion3 = true;
         switch (labelTituloAlmacen.getText()) {
             case "Agregar":
                 if (comprobarTXTAlmacen()) {
                     if(!(Double.valueOf(txtPrecio.getText()) >= 0 && Double.valueOf(txtPrecio.getText()) <= 9999.99)){
                         JOptionPane.showMessageDialog(this, "El rango del precio tiene que ser de 0 a 9999.99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
-                        confirmacion1 = true;
+                        confirmacion1 = false;
                     }
-                    if (!(Double.valueOf(txtExistencia.getText()) >= 0 && Double.valueOf(txtExistencia.getText()) <= 99)) {
+                    if (confirmacion1 == true && !(Double.valueOf(txtExistencia.getText()) >= 0 && Double.valueOf(txtExistencia.getText()) <= 99)) {
                         JOptionPane.showMessageDialog(this, "El rango de la existencia tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
-                        confirmacion2 = true;
+                        confirmacion2 = false;
                     }
-                    if (!(Double.valueOf(txtStock.getText()) >= 0 && Double.valueOf(txtStock.getText()) <= 99)) {
+                    if (confirmacion1 == true && confirmacion2 == true && !(Double.valueOf(txtStock.getText()) >= 0 && Double.valueOf(txtStock.getText()) <= 99)) {
                         JOptionPane.showMessageDialog(this, "El rango del stock tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
-                        confirmacion3 = true;
+                        confirmacion3 = false;
                     }
                     if (confirmacion1 == true && confirmacion2 == true && confirmacion3 == true) {
                         String[] datos = {"3", txtNombre.getText(), txtPrecio.getText(), txtExistencia.getText(), txtStock.getText(), comboBoxAlmacenUM.getSelectedItem().toString()};
                         modeloTablaAlmacen.addRow(datos);
+                        int seleccion = JOptionPane.showOptionDialog(this, "Productor agregado con extio \n Desea agregar otro producto", "Producto agregador",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, "Si");
+                        if (seleccion == 1) {
+                            almacenFormaBase();
+                        } else {
+                            txtNombre.setText("");
+                            txtPrecio.setText("");
+                            txtExistencia.setText("");
+                            txtStock.setText("");
+                        }
                     }
-                    
                 } else {
                     JOptionPane.showMessageDialog(this, "Favor de rellenar todos los campos de texto", "Advertencia", JOptionPane.WARNING_MESSAGE);
                 }
@@ -895,6 +927,58 @@ public class Main extends javax.swing.JFrame {
             case "Eliminar":
                 break;
             case "Modificar":
+                if (tablaAlmacenSeleccionModificar == tablaAlmacen.getSelectedRow()) {
+                    int seleccion;
+                    String[] aux = new String[modeloTablaAlmacen.getColumnCount()];
+                    for (int i = 0; i < aux.length; i++) {
+                        aux[i] = modeloTablaAlmacen.getValueAt(tablaAlmacen.getSelectedRow(), i).toString();
+                    }
+                    if (comprobarTXTAlmacen()) {
+                        if(!(Double.valueOf(txtPrecio.getText()) >= 0 && Double.valueOf(txtPrecio.getText()) <= 9999.99)){
+                            JOptionPane.showMessageDialog(this, "El rango del precio tiene que ser de 0 a 9999.99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                            confirmacion1 = false;
+                        }
+                        if (confirmacion1 == true && !(Double.valueOf(txtExistencia.getText()) >= 0 && Double.valueOf(txtExistencia.getText()) <= 99)) {
+                            JOptionPane.showMessageDialog(this, "El rango de la existencia tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                            confirmacion2 = false;
+                        }
+                        if (confirmacion1 == true && confirmacion2 == true && !(Double.valueOf(txtStock.getText()) >= 0 && Double.valueOf(txtStock.getText()) <= 99)) {
+                            JOptionPane.showMessageDialog(this, "El rango del stock tiene que ser de 0 a 99", "Fuera de Rango", JOptionPane.ERROR_MESSAGE);
+                            confirmacion3 = false;
+                        }
+                        if (confirmacion1 == true && confirmacion2 == true && confirmacion3 == true) {
+                            seleccion = JOptionPane.showConfirmDialog(this, "Se modificaran los siguientes elementos \n" 
+                            + aux[1] + "--->"
+                            + txtNombre.getText() + "\n" + aux[2] + "--->"
+                            + txtPrecio.getText() + "\n" + aux[3] + "--->"
+                            + txtExistencia.getText() + "\n" + aux[4] + "--->"
+                            + txtStock.getText() + "\n" + aux[5] + "--->"
+                            + comboBoxAlmacenUM.getSelectedItem().toString(), "Modificar producto", JOptionPane.INFORMATION_MESSAGE);
+                            if (JOptionPane.OK_OPTION == seleccion) {
+                                    modeloTablaAlmacen.setValueAt(aux[0], tablaAlmacenSeleccionModificar, 0);
+                                    modeloTablaAlmacen.setValueAt(txtNombre.getText(), tablaAlmacenSeleccionModificar, 1);
+                                    modeloTablaAlmacen.setValueAt(txtPrecio.getText(), tablaAlmacenSeleccionModificar, 2);
+                                    modeloTablaAlmacen.setValueAt(txtExistencia.getText(), tablaAlmacenSeleccionModificar, 3);
+                                    modeloTablaAlmacen.setValueAt(txtStock.getText(), tablaAlmacenSeleccionModificar, 4);
+                                    modeloTablaAlmacen.setValueAt(comboBoxAlmacenUM.getSelectedItem().toString(), tablaAlmacenSeleccionModificar, 5);
+                                if(JOptionPane.showOptionDialog(this, "Productor modificado con extio \n Desea modificar otro producto", "Producto Modificado",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, "Si") == 1) {
+                                    almacenFormaBase();
+                                } else {
+                                    txtNombre.setText("");
+                                    txtPrecio.setText("");
+                                    txtExistencia.setText("");
+                                    txtStock.setText("");
+                                }
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Favor de rellenar todos los campos de texto", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Favor de seleccionar en la tabla el mismo producto que se encuentra en el renglon " 
+                            + (tablaAlmacenSeleccionModificar + 1), "Se a seleccionado otro producto", JOptionPane.WARNING_MESSAGE);
+                }
                 break;
             case "Consultar":
                 break;
@@ -903,32 +987,96 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConfirmarAlmacenActionPerformed
 
-    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
         char c = evt.getKeyChar();
         if(c >= 48 && c <= 57) {} 
         else {
-            JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
             evt.consume();
+            JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_txtPrecioKeyPressed
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
-    private void txtExistenciaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaKeyPressed
+    private void txtExistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtExistenciaKeyTyped
         char c = evt.getKeyChar();
         if(c >= 48 && c <= 57) {} 
         else {
             JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
             evt.consume();
         }
-    }//GEN-LAST:event_txtExistenciaKeyPressed
+    }//GEN-LAST:event_txtExistenciaKeyTyped
 
-    private void txtStockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyPressed
+    private void txtStockKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyTyped
         char c = evt.getKeyChar();
         if(c >= 48 && c <= 57) {} 
         else {
             JOptionPane.showMessageDialog(this, "El caracter " + c + " no es valido", "Caracter Invalido", JOptionPane.ERROR_MESSAGE);
             evt.consume();
         }
-    }//GEN-LAST:event_txtStockKeyPressed
+    }//GEN-LAST:event_txtStockKeyTyped
+
+    private void btnAlmacenEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenEliminarActionPerformed
+        if(tablaAlmacen.getSelectedRow() != -1) {
+            int seleccion;
+            String[] aux = new String[modeloTablaAlmacen.getColumnCount()];
+            for (int i = 0; i < aux.length; i++) {
+                aux[i] = modeloTablaAlmacen.getValueAt(tablaAlmacen.getSelectedRow(), i).toString();
+            }
+            seleccion = JOptionPane.showConfirmDialog(this, "Seguro que quieres eliminar el siguiente producto? \n " + aux[1]
+                    , "Eliminar producto", JOptionPane.WARNING_MESSAGE);
+            if (JOptionPane.OK_OPTION == seleccion) {
+                modeloTablaAlmacen.removeRow(tablaAlmacen.getSelectedRow());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Porfavor seleccionar el elemento que se desea elminar de la tabla","No se a seleccionado ningun elemnto", JOptionPane.WARNING_MESSAGE );
+        }
+    }//GEN-LAST:event_btnAlmacenEliminarActionPerformed
+
+    private void btnAlmacenConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenConsultarActionPerformed
+        jLabel7.setVisible(true);
+        jLabel8.setVisible(true);
+        txtAlmacenBuscar.setVisible(true);
+        btnRadioID.setVisible(true);
+        btnRadioCantidad.setVisible(true);
+        btnRadioNombre.setVisible(true);
+        btnRadioPrecio.setVisible(true);
+    }//GEN-LAST:event_btnAlmacenConsultarActionPerformed
+
+    private void btnAlmacenModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlmacenModificarActionPerformed
+        if(tablaAlmacen.getSelectedRow() != -1) {
+            labelTituloAlmacen.setText("Modificar");
+            labelTituloAlmacen.setVisible(true);
+            txtNombre.setVisible(true);
+            txtPrecio.setVisible(true);
+            txtExistencia.setVisible(true);
+            txtStock.setVisible(true);
+            comboBoxAlmacenUM.setVisible(true);
+            labelAlmacenExistencia.setVisible(true);
+            labelAlmacenNombre.setVisible(true);
+            labelAlmacenPrecio.setVisible(true);
+            labelAlmacenStock.setVisible(true);
+            labelAlmacenUM.setVisible(true);
+            btnConfirmarAlmacen.setVisible(true);
+            btnConfirmarAlmacen.setEnabled(true);
+            String[] aux = new String[modeloTablaAlmacen.getColumnCount()];
+            for (int i = 0; i < aux.length; i++) {
+                aux[i] = modeloTablaAlmacen.getValueAt(tablaAlmacen.getSelectedRow(), i).toString();
+            }
+            txtNombre.setText(aux[1]);
+            txtPrecio.setText(aux[2]);
+            txtExistencia.setText(aux[3]);
+            txtStock.setText(aux[4]);
+            if (aux[5].equals(comboBoxAlmacenUM.getItemAt(0))) {
+                comboBoxAlmacenUM.setSelectedIndex(0);
+            } else if (aux[5].equals(comboBoxAlmacenUM.getItemAt(1))) {
+                comboBoxAlmacenUM.setSelectedIndex(1);
+            }
+            btnConfirmarAlmacen.setVisible(true);
+            btnConfirmarAlmacen.setEnabled(true);
+            tablaAlmacenSeleccionModificar = tablaAlmacen.getSelectedRow();
+        } else {
+            JOptionPane.showMessageDialog(this, "Porfavor seleccionar el elemento que se desea modificar de la tabla","No se a seleccionado ningun elemnto", JOptionPane.WARNING_MESSAGE );
+        }
+    }//GEN-LAST:event_btnAlmacenModificarActionPerformed
     /*-----------------------METODOS-----------------------------------------*/
     /*----------------ValidatDouble------------------------------------------*/
     public double validarInt(String validacion){
@@ -1061,6 +1209,20 @@ public class Main extends javax.swing.JFrame {
         txtExistencia.setVisible(false);
         txtStock.setVisible(false);
         comboBoxAlmacenUM.setVisible(false);
+        jLabel7.setVisible(false);
+        btnRadioID.setVisible(false);
+        btnRadioCantidad.setVisible(false);
+        btnRadioNombre.setVisible(false);
+        btnRadioPrecio.setVisible(false);
+        jLabel8.setVisible(false);
+        txtAlmacenBuscar.setVisible(false);
+        
+        btnRadioID.setSelected(true);
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        txtExistencia.setText("");
+        txtStock.setText("");
+        txtAlmacenBuscar.setText("");
         
         labelAlmacenExistencia.setVisible(false);
         labelAlmacenNombre.setVisible(false);
@@ -1091,8 +1253,6 @@ public class Main extends javax.swing.JFrame {
     }
     /*------------------Metodo para Comprobar si los textos estan vacios del panel almecen------------------------*/
     public boolean comprobarTXTAlmacen() {
-        System.out.println(txtStock.getText());
-        System.out.println(txtPrecio.getText());
         return !txtStock.getText().equals("")
                 && !txtPrecio.getText().equals("") && !txtExistencia.getText().equals("") && !txtNombre.getText().equals("");
     }
@@ -1168,6 +1328,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAlmacenExistencia;
     private javax.swing.JLabel labelAlmacenNombre;
@@ -1190,6 +1351,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollSeleccionado;
     private javax.swing.JTextField searchBar;
     private javax.swing.JTable tablaAlmacen;
+    private javax.swing.JTextField txtAlmacenBuscar;
     private javax.swing.JTextField txtCambio;
     private javax.swing.JTextField txtExistencia;
     private javax.swing.JTextField txtNombre;
