@@ -37,6 +37,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         //pito
+        //cuulo ajajajaj XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
         this.setResizable(false);
         this.setSize(1450, 720);
         searchBar.requestFocus();
