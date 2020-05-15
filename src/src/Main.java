@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
     
     public Main() {
         initComponents();
-        //this.setResizable(false);
+        this.setResizable(false);
         this.setSize(1450, 720);
         searchBar.requestFocus();
         labelWarning.setVisible(false);
