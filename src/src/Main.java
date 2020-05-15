@@ -36,6 +36,7 @@ public class Main extends javax.swing.JFrame {
     
     public Main() {
         initComponents();
+        //fjqnvu hruehiduvhas me duele el pito
         //pito
         this.setResizable(false);
         this.setSize(1450, 720);
