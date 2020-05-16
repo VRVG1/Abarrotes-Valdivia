@@ -5,7 +5,6 @@
  */
 package src;
 
-import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 
@@ -32,7 +31,6 @@ public class GestionarAlmacen extends javax.swing.JPanel {
         tablaAlmacen.setModel(modeloTablaAlmacen);
         tablaAlmacen.getTableHeader().setReorderingAllowed(false);
         almacenFormaBase();
-        this.setBackground(Color.red);
     }
 
     /**
