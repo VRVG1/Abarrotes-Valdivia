@@ -28,6 +28,7 @@ public class Main extends javax.swing.JFrame {
     static int tablaAlmacenSeleccionModificar;
     
     GestionarAlmacen gestionarAlmacen = new GestionarAlmacen();
+    GestionarCompras gestionarCompras = new GestionarCompras();
     
     DefaultListModel<Producto> model;
     DefaultListModel<Producto> model2;
@@ -38,8 +39,8 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         //pito
         //cuulo ajajajaj XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-        this.setResizable(false);
-        this.setSize(1450, 720);
+        //this.setResizable(false);
+        //this.setSize(1450, 720);
         searchBar.requestFocus();
         labelWarning.setVisible(false);
         labelWarning.setForeground(Color.red);
@@ -51,11 +52,14 @@ public class Main extends javax.swing.JFrame {
         model3 = new DefaultListModel<Producto>();
         
 
-       
+        modeloTablaAlmacen = new DefaultTableModel(datosTemporalesTablaAlmacen,cabeceraTablaAlmacen);
+        tablaAlmacen.setModel(modeloTablaAlmacen);
+        tablaAlmacen.getTableHeader().setReorderingAllowed(false);
         
         ListaSeleccionada.setModel(model2);
         cardLayout = (CardLayout)PanelCardLayout.getLayout();
         PanelCardLayout.add(gestionarAlmacen, "Gestionar Almecen");
+        PanelCardLayout.add(gestionarCompras, "Gestionar Compras");
     }
 
     @SuppressWarnings("unchecked")
@@ -99,7 +103,33 @@ public class Main extends javax.swing.JFrame {
         btnVentasVisual = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         panelCompras = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAlmacen32 = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        btnRadioCantidad = new javax.swing.JRadioButton();
+        btnRadioID = new javax.swing.JRadioButton();
+        btnRadioNombre = new javax.swing.JRadioButton();
+        btnRadioPrecio = new javax.swing.JRadioButton();
+        btnRadioProveedor = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtComprasBuscar = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btnConsultaCompras = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaAlmacen = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        labelTotal1 = new javax.swing.JLabel();
+        txtTotal1 = new javax.swing.JTextField();
+        txtPago1 = new javax.swing.JTextField();
+        labelWarning1 = new javax.swing.JLabel();
+        btnCobrar1 = new javax.swing.JButton();
+        txtCambio1 = new javax.swing.JTextField();
+        btnNewC1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         panelClientes = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         panelProveedores = new javax.swing.JPanel();
@@ -193,8 +223,8 @@ public class Main extends javax.swing.JFrame {
 
         PanelCardLayout.setLayout(new java.awt.CardLayout());
 
-        panelVentas.setMinimumSize(new java.awt.Dimension(1450, 682));
-        panelVentas.setPreferredSize(new java.awt.Dimension(1450, 682));
+        panelVentas.setMinimumSize(new java.awt.Dimension(1360, 720));
+        panelVentas.setPreferredSize(new java.awt.Dimension(1360, 720));
         panelVentas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labelWarning.setText("No se permiten letras");
@@ -361,24 +391,164 @@ public class Main extends javax.swing.JFrame {
 
         PanelCardLayout.add(panelVentas, "Ventas");
 
-        jLabel6.setText("Panel Compras, borrar este label");
+        panelCompras.setLayout(null);
 
-        javax.swing.GroupLayout panelComprasLayout = new javax.swing.GroupLayout(panelCompras);
-        panelCompras.setLayout(panelComprasLayout);
-        panelComprasLayout.setHorizontalGroup(
-            panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelComprasLayout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jLabel6)
-                .addContainerGap(1122, Short.MAX_VALUE))
-        );
-        panelComprasLayout.setVerticalGroup(
-            panelComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelComprasLayout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jLabel6)
-                .addContainerGap(395, Short.MAX_VALUE))
-        );
+        tablaAlmacen32.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaAlmacen32);
+
+        panelCompras.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 180, 520, 310);
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel5.setText("Productos por comprar");
+        panelCompras.add(jLabel5);
+        jLabel5.setBounds(156, 101, 220, 50);
+
+        btnRadioCantidad.setText("Cantidad");
+        panelCompras.add(btnRadioCantidad);
+        btnRadioCantidad.setBounds(1040, 120, 80, 23);
+
+        btnRadioID.setText("ID");
+        panelCompras.add(btnRadioID);
+        btnRadioID.setBounds(850, 120, 50, 23);
+
+        btnRadioNombre.setText("Nombre");
+        panelCompras.add(btnRadioNombre);
+        btnRadioNombre.setBounds(900, 120, 70, 23);
+
+        btnRadioPrecio.setText("Precio");
+        panelCompras.add(btnRadioPrecio);
+        btnRadioPrecio.setBounds(970, 120, 60, 23);
+
+        btnRadioProveedor.setText("Proveedor");
+        panelCompras.add(btnRadioProveedor);
+        btnRadioProveedor.setBounds(1130, 120, 90, 23);
+
+        jLabel7.setText("Filtrar por:");
+        panelCompras.add(jLabel7);
+        jLabel7.setBounds(770, 120, 90, 14);
+
+        txtComprasBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtComprasBuscarActionPerformed(evt);
+            }
+        });
+        panelCompras.add(txtComprasBuscar);
+        txtComprasBuscar.setBounds(850, 70, 290, 30);
+
+        jLabel8.setText("Buscar");
+        panelCompras.add(jLabel8);
+        jLabel8.setBounds(780, 80, 70, 14);
+
+        btnConsultaCompras.setText("Consultar compras");
+        btnConsultaCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultaComprasActionPerformed(evt);
+            }
+        });
+        panelCompras.add(btnConsultaCompras);
+        btnConsultaCompras.setBounds(550, 350, 175, 30);
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setText("GESTIONAR COMPRAS");
+        panelCompras.add(jLabel6);
+        jLabel6.setBounds(147, 11, 220, 50);
+
+        tablaAlmacen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaAlmacen);
+
+        panelCompras.add(jScrollPane2);
+        jScrollPane2.setBounds(740, 180, 520, 450);
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jLabel9.setText("Productos disponibles");
+        panelCompras.add(jLabel9);
+        jLabel9.setBounds(870, 20, 220, 50);
+
+        jButton1.setText("Quitar producto de la compra");
+        panelCompras.add(jButton1);
+        jButton1.setBounds(540, 290, 190, 40);
+
+        jButton2.setText("Agregar producto a la compra");
+        panelCompras.add(jButton2);
+        jButton2.setBounds(540, 240, 190, 40);
+
+        labelTotal1.setText("Total");
+        panelCompras.add(labelTotal1);
+        labelTotal1.setBounds(10, 650, 40, 14);
+
+        txtTotal1.setEditable(false);
+        txtTotal1.setText("$");
+        panelCompras.add(txtTotal1);
+        txtTotal1.setBounds(50, 640, 491, 30);
+
+        txtPago1.setText("$ ");
+        txtPago1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPago1MouseClicked(evt);
+            }
+        });
+        txtPago1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPago1KeyTyped(evt);
+            }
+        });
+        panelCompras.add(txtPago1);
+        txtPago1.setBounds(10, 520, 531, 30);
+
+        labelWarning1.setText("No se permiten letras");
+        panelCompras.add(labelWarning1);
+        labelWarning1.setBounds(10, 500, 140, 14);
+
+        btnCobrar1.setText("Calcular el cambio");
+        btnCobrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobrar1ActionPerformed(evt);
+            }
+        });
+        panelCompras.add(btnCobrar1);
+        btnCobrar1.setBounds(10, 550, 531, 23);
+
+        txtCambio1.setText("$ ");
+        panelCompras.add(txtCambio1);
+        txtCambio1.setBounds(10, 580, 530, 30);
+
+        btnNewC1.setText("Nueva Compra");
+        btnNewC1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewC1ActionPerformed(evt);
+            }
+        });
+        panelCompras.add(btnNewC1);
+        btnNewC1.setBounds(10, 610, 531, 23);
+
+        jLabel10.setText("Cambio");
+        panelCompras.add(jLabel10);
+        jLabel10.setBounds(550, 580, 50, 14);
+
+        jLabel11.setText("Pago");
+        panelCompras.add(jLabel11);
+        jLabel11.setBounds(550, 520, 40, 14);
 
         PanelCardLayout.add(panelCompras, "Compras");
 
@@ -391,14 +561,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(jLabel4)
-                .addContainerGap(1128, Short.MAX_VALUE))
+                .addContainerGap(2520, Short.MAX_VALUE))
         );
         panelClientesLayout.setVerticalGroup(
             panelClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelClientesLayout.createSequentialGroup()
                 .addGap(283, 283, 283)
                 .addComponent(jLabel4)
-                .addContainerGap(395, Short.MAX_VALUE))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
 
         PanelCardLayout.add(panelClientes, "Clientes");
@@ -412,14 +582,14 @@ public class Main extends javax.swing.JFrame {
             .addGroup(panelProveedoresLayout.createSequentialGroup()
                 .addGap(325, 325, 325)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(902, Short.MAX_VALUE))
+                .addContainerGap(2265, Short.MAX_VALUE))
         );
         panelProveedoresLayout.setVerticalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProveedoresLayout.createSequentialGroup()
                 .addGap(237, 237, 237)
                 .addComponent(jLabel3)
-                .addContainerGap(441, Short.MAX_VALUE))
+                .addContainerGap(526, Short.MAX_VALUE))
         );
 
         PanelCardLayout.add(panelProveedores, "Proveedores");
@@ -713,7 +883,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnGesComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesComprasActionPerformed
         cardLayout.show(PanelCardLayout, "Compras");
-        panelCompras.setBackground(Color.red);
+        //gestionarCompras.comprasFormaBase();
     }//GEN-LAST:event_btnGesComprasActionPerformed
 
     private void btnGesAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesAlmacenActionPerformed
@@ -728,6 +898,31 @@ public class Main extends javax.swing.JFrame {
     private void btnGesProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesProveedorActionPerformed
         cardLayout.show(PanelCardLayout, "Proveedores");
     }//GEN-LAST:event_btnGesProveedorActionPerformed
+
+    private void txtComprasBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtComprasBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtComprasBuscarActionPerformed
+
+    private void btnConsultaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaComprasActionPerformed
+        ComprasConsulta cc = new ComprasConsulta(this, true);
+        cc.setVisible(true);
+    }//GEN-LAST:event_btnConsultaComprasActionPerformed
+
+    private void txtPago1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPago1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPago1MouseClicked
+
+    private void txtPago1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPago1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPago1KeyTyped
+
+    private void btnCobrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCobrar1ActionPerformed
+
+    private void btnNewC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewC1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNewC1ActionPerformed
     /*-----------------------METODOS-----------------------------------------*/
     /*----------------ValidatDouble------------------------------------------*/
     public double validarInt(String validacion){
@@ -893,6 +1088,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarlist2;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnCobrar;
+    private javax.swing.JButton btnCobrar1;
+    private javax.swing.JButton btnConsultaCompras;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnGesAlmacen;
     private javax.swing.JButton btnGesClientes;
@@ -904,19 +1101,37 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnMas;
     private javax.swing.JButton btnModification;
     private javax.swing.JButton btnNewC;
+    private javax.swing.JButton btnNewC1;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JRadioButton btnRadioCantidad;
+    private javax.swing.JRadioButton btnRadioID;
+    private javax.swing.JRadioButton btnRadioNombre;
+    private javax.swing.JRadioButton btnRadioPrecio;
+    private javax.swing.JRadioButton btnRadioProveedor;
     private javax.swing.JButton btnSaveExit;
     private javax.swing.JButton btnTotal;
     private javax.swing.JButton btnVentasVisual;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelGestionar;
     private javax.swing.JLabel labelMatches;
     private javax.swing.JLabel labelTotal;
+    private javax.swing.JLabel labelTotal1;
     private javax.swing.JLabel labelWarning;
+    private javax.swing.JLabel labelWarning1;
     private javax.swing.JList<Producto> listBuscar;
     private javax.swing.JPanel panelClientes;
     private javax.swing.JPanel panelCompras;
@@ -926,8 +1141,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollBuscar;
     private javax.swing.JScrollPane scrollSeleccionado;
     private javax.swing.JTextField searchBar;
+    private javax.swing.JTable tablaAlmacen;
+    private javax.swing.JTable tablaAlmacen32;
     private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtCambio1;
+    private javax.swing.JTextField txtComprasBuscar;
     private javax.swing.JTextField txtPago;
+    private javax.swing.JTextField txtPago1;
     private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField txtTotal1;
     // End of variables declaration//GEN-END:variables
 }
