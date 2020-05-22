@@ -11,10 +11,17 @@ package src;
  */
 public class GestionarProveedores extends javax.swing.JPanel {
 
+    private boolean queryTodos;
+    private boolean queryId;
+    private boolean queryNom;
     /**
      * Creates new form GestionarProveedores
      */
     public GestionarProveedores() {
+        queryTodos = false;
+        queryId = false;
+        queryNom = false;
+        
         initComponents();
     }
 
@@ -42,9 +49,9 @@ public class GestionarProveedores extends javax.swing.JPanel {
         tipoConsultaLabel = new javax.swing.JLabel();
         tfIDProv = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jrbTodos = new javax.swing.JRadioButton();
+        jrbID = new javax.swing.JRadioButton();
+        jrbNombre = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         ventanaModificar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -89,6 +96,11 @@ public class GestionarProveedores extends javax.swing.JPanel {
         jLabel4.setText("Nombre:");
 
         tfNombreProv.setText("Ingrese Nombre del Proveedor");
+        tfNombreProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfNombreProvMouseClicked(evt);
+            }
+        });
 
         errorLabelAgregar.setForeground(new java.awt.Color(255, 0, 0));
         errorLabelAgregar.setText("Error Label");
@@ -107,13 +119,13 @@ public class GestionarProveedores extends javax.swing.JPanel {
                         .addGroup(ventanaAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(errorLabelAgregar)
                             .addGroup(ventanaAgregarLayout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(btnAgregar))
+                            .addGroup(ventanaAgregarLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfNombreProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(ventanaAgregarLayout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(btnAgregar)))
-                        .addGap(0, 46, Short.MAX_VALUE))
+                                .addComponent(tfNombreProv, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                        .addGap(0, 26, Short.MAX_VALUE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -127,10 +139,10 @@ public class GestionarProveedores extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ventanaAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tfNombreProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNombreProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         windowOptions.add(ventanaAgregar, "Agregar");
@@ -148,17 +160,37 @@ public class GestionarProveedores extends javax.swing.JPanel {
 
         tfIDProv.setText("Ingrese el ID del Proveedor");
         tfIDProv.setEnabled(false);
+        tfIDProv.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfIDProvMouseClicked(evt);
+            }
+        });
 
         btnBuscar.setText("Buscar");
 
-        btnGroup.add(jRadioButton1);
-        jRadioButton1.setText("Todos");
+        btnGroup.add(jrbTodos);
+        jrbTodos.setText("Todos");
+        jrbTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbTodosActionPerformed(evt);
+            }
+        });
 
-        btnGroup.add(jRadioButton2);
-        jRadioButton2.setText("ID");
+        btnGroup.add(jrbID);
+        jrbID.setText("ID");
+        jrbID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbIDActionPerformed(evt);
+            }
+        });
 
-        btnGroup.add(jRadioButton3);
-        jRadioButton3.setText("Nombre");
+        btnGroup.add(jrbNombre);
+        jrbNombre.setText("Nombre");
+        jrbNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbNombreActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Tipo de Consulta:");
 
@@ -174,13 +206,6 @@ public class GestionarProveedores extends javax.swing.JPanel {
                     .addGroup(ventanaConsultarLayout.createSequentialGroup()
                         .addGroup(ventanaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ventanaConsultarLayout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jRadioButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton3))
-                            .addGroup(ventanaConsultarLayout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(jLabel8))
                             .addGroup(ventanaConsultarLayout.createSequentialGroup()
@@ -189,14 +214,23 @@ public class GestionarProveedores extends javax.swing.JPanel {
                                     .addComponent(errorLabelConsultar)
                                     .addGroup(ventanaConsultarLayout.createSequentialGroup()
                                         .addComponent(tipoConsultaLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(ventanaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfIDProv, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(ventanaConsultarLayout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(btnBuscar)))))))
-                        .addGap(0, 62, Short.MAX_VALUE)))
+                                                .addGap(23, 23, 23)
+                                                .addComponent(btnBuscar))
+                                            .addGroup(ventanaConsultarLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(tfIDProv, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(32, 32, 32)))
                 .addContainerGap())
+            .addGroup(ventanaConsultarLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jrbTodos)
+                .addGap(18, 18, 18)
+                .addComponent(jrbID)
+                .addGap(18, 18, 18)
+                .addComponent(jrbNombre)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ventanaConsultarLayout.setVerticalGroup(
             ventanaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,9 +241,9 @@ public class GestionarProveedores extends javax.swing.JPanel {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ventanaConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jrbTodos)
+                    .addComponent(jrbID)
+                    .addComponent(jrbNombre))
                 .addGap(18, 18, 18)
                 .addComponent(errorLabelConsultar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,7 +252,7 @@ public class GestionarProveedores extends javax.swing.JPanel {
                     .addComponent(tfIDProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         windowOptions.add(ventanaConsultar, "Consultar");
@@ -234,13 +268,28 @@ public class GestionarProveedores extends javax.swing.JPanel {
         jLabel2.setText("ID Proveedor:");
 
         tfIdProvModificar.setText("Ingrese el ID del Proveedor");
+        tfIdProvModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfIdProvModificarMouseClicked(evt);
+            }
+        });
 
         btnBuscarModificar.setText("Buscar");
+        btnBuscarModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarModificarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Nombre Proveedor:");
 
         tfNombreProvModificar.setText("Ingrese el nombre del Proveedor");
         tfNombreProvModificar.setEnabled(false);
+        tfNombreProvModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfNombreProvModificarMouseClicked(evt);
+            }
+        });
 
         btnModificar.setText("Guardar Cambios");
         btnModificar.setEnabled(false);
@@ -272,8 +321,8 @@ public class GestionarProveedores extends javax.swing.JPanel {
                                     .addComponent(jLabel7))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(ventanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfNombreProvModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfIdProvModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(tfNombreProvModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                                    .addComponent(tfIdProvModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -296,7 +345,7 @@ public class GestionarProveedores extends javax.swing.JPanel {
                 .addGroup(ventanaModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarModificar)
                     .addComponent(btnModificar))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         windowOptions.add(ventanaModificar, "Modificar");
@@ -311,10 +360,26 @@ public class GestionarProveedores extends javax.swing.JPanel {
         jLabel9.setText("ID Proveedor:");
 
         tfIDProvEliminar.setText("Ingrese el Id del Proveedor");
+        tfIDProvEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfIDProvEliminarMouseClicked(evt);
+            }
+        });
 
         jLabel10.setText("Nombre:");
 
+        tfNombreEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfNombreEliminarMouseClicked(evt);
+            }
+        });
+
         btnBuscarEliminar.setText("Buscar");
+        btnBuscarEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEliminarActionPerformed(evt);
+            }
+        });
 
         btnConfirm.setText("Eliminar");
         btnConfirm.setEnabled(false);
@@ -365,10 +430,10 @@ public class GestionarProveedores extends javax.swing.JPanel {
                 .addGroup(ventanaEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscarEliminar)
                     .addComponent(btnConfirm))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
-        windowOptions.add(ventanaEliminar, "card5");
+        windowOptions.add(ventanaEliminar, "Eliminar");
 
         opcionesPane.add(windowOptions, java.awt.BorderLayout.CENTER);
 
@@ -381,15 +446,35 @@ public class GestionarProveedores extends javax.swing.JPanel {
         cabeceraOpcionesPane.add(tituloOpcionesLabel, java.awt.BorderLayout.NORTH);
 
         btnAgregarWindow.setText("Agregar");
+        btnAgregarWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarWindowActionPerformed(evt);
+            }
+        });
         botonesPane.add(btnAgregarWindow);
 
         btnConsultarWindow.setText("Consultar");
+        btnConsultarWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarWindowActionPerformed(evt);
+            }
+        });
         botonesPane.add(btnConsultarWindow);
 
         btnModificarWindow.setText("Modificar");
+        btnModificarWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarWindowActionPerformed(evt);
+            }
+        });
         botonesPane.add(btnModificarWindow);
 
         btnEliminarWindow.setText("Eliminar");
+        btnEliminarWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarWindowActionPerformed(evt);
+            }
+        });
         botonesPane.add(btnEliminarWindow);
 
         cabeceraOpcionesPane.add(botonesPane, java.awt.BorderLayout.CENTER);
@@ -411,7 +496,7 @@ public class GestionarProveedores extends javax.swing.JPanel {
             tituloPrincipalPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tituloPrincipalPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tituloPrincipalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addComponent(tituloPrincipalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
                 .addContainerGap())
         );
         tituloPrincipalPaneLayout.setVerticalGroup(
@@ -448,6 +533,81 @@ public class GestionarProveedores extends javax.swing.JPanel {
         add(jScrollPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAgregarWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarWindowActionPerformed
+        java.awt.CardLayout card = (java.awt.CardLayout)windowOptions.getLayout();
+        card.show(windowOptions, "Agregar");
+    }//GEN-LAST:event_btnAgregarWindowActionPerformed
+
+    private void btnConsultarWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarWindowActionPerformed
+        java.awt.CardLayout card = (java.awt.CardLayout)windowOptions.getLayout();
+        card.show(windowOptions, "Consultar");
+    }//GEN-LAST:event_btnConsultarWindowActionPerformed
+
+    private void btnModificarWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarWindowActionPerformed
+        java.awt.CardLayout card = (java.awt.CardLayout)windowOptions.getLayout();
+        card.show(windowOptions, "Modificar");
+    }//GEN-LAST:event_btnModificarWindowActionPerformed
+
+    private void btnEliminarWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarWindowActionPerformed
+        java.awt.CardLayout card = (java.awt.CardLayout)windowOptions.getLayout();
+        card.show(windowOptions, "Eliminar");
+    }//GEN-LAST:event_btnEliminarWindowActionPerformed
+
+    private void tfNombreProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreProvMouseClicked
+        tfNombreProv.setText("");
+    }//GEN-LAST:event_tfNombreProvMouseClicked
+
+    private void jrbTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTodosActionPerformed
+        queryTodos = true;
+        queryId = false;
+        queryNom = false;
+        tfIDProv.setEnabled(false);
+    }//GEN-LAST:event_jrbTodosActionPerformed
+
+    private void jrbIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbIDActionPerformed
+        queryId = true;
+        queryTodos = false;
+        queryNom = false;
+        tfIDProv.setEnabled(true);
+        tipoConsultaLabel.setText("ID Proveedor:");
+    }//GEN-LAST:event_jrbIDActionPerformed
+
+    private void jrbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNombreActionPerformed
+        queryNom = true;
+        queryId = false;
+        queryTodos = false;
+        tfIDProv.setEnabled(true);
+        tipoConsultaLabel.setText("Nombre Proveedor:");
+    }//GEN-LAST:event_jrbNombreActionPerformed
+
+    private void tfIDProvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfIDProvMouseClicked
+        tfIDProv.setText("");
+    }//GEN-LAST:event_tfIDProvMouseClicked
+
+    private void tfIdProvModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfIdProvModificarMouseClicked
+        tfIdProvModificar.setText("");
+    }//GEN-LAST:event_tfIdProvModificarMouseClicked
+
+    private void btnBuscarModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarModificarActionPerformed
+        //metodos de busqueda en la base de datos
+    }//GEN-LAST:event_btnBuscarModificarActionPerformed
+
+    private void tfNombreProvModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreProvModificarMouseClicked
+        tfNombreProv.setText("");
+    }//GEN-LAST:event_tfNombreProvModificarMouseClicked
+
+    private void tfIDProvEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfIDProvEliminarMouseClicked
+        tfIDProvEliminar.setText("");
+    }//GEN-LAST:event_tfIDProvEliminarMouseClicked
+
+    private void tfNombreEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfNombreEliminarMouseClicked
+        tfNombreEliminar.setText("");
+    }//GEN-LAST:event_tfNombreEliminarMouseClicked
+
+    private void btnBuscarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEliminarActionPerformed
+        //metodos de busqueda en la base de datos
+    }//GEN-LAST:event_btnBuscarEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonesPane;
@@ -477,10 +637,10 @@ public class GestionarProveedores extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton jrbID;
+    private javax.swing.JRadioButton jrbNombre;
+    private javax.swing.JRadioButton jrbTodos;
     private javax.swing.JPanel opcionesPane;
     private javax.swing.JTable tablaProveedores;
     private javax.swing.JTextField tfIDProv;
