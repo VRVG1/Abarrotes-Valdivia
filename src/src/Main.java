@@ -6,23 +6,21 @@ import java.util.Calendar;
 import java.awt.*;
 
 public class Main extends javax.swing.JFrame {
+
     static CardLayout cardLayout;
     
     GestionarAlmacen gestionarAlmacen = new GestionarAlmacen();
     GestionarVentas gestionarVentas = new GestionarVentas();
     
+    private IngresoDialog ingreso;
+    
     public Main() {
+        
         initComponents();
         //fjqnvu hruehiduvhas me duele el pito
         //pito
         this.setResizable(false);
         this.setSize(1450, 720);
-
-        cardLayout = (CardLayout)PanelCardLayout.getLayout();
-        PanelCardLayout.add(gestionarAlmacen, "Gestionar Almecen");
-        PanelCardLayout.add(gestionarVentas, "Gestionar Ventas");
-        
-        cardLayout.show(PanelCardLayout, "Gestionar Ventas");
     }
 
     @SuppressWarnings("unchecked")
@@ -239,7 +237,7 @@ public class Main extends javax.swing.JFrame {
     private void btnGesClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesClientesActionPerformed
         cardLayout.show(PanelCardLayout, "Clientes");
     }//GEN-LAST:event_btnGesClientesActionPerformed
-
+        
     private void btnGesProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGesProveedorActionPerformed
         cardLayout.show(PanelCardLayout, "Proveedores");
     }//GEN-LAST:event_btnGesProveedorActionPerformed
@@ -290,7 +288,6 @@ public class Main extends javax.swing.JFrame {
                String.valueOf(today.getTime().getMinutes()) + ":"
                + String.valueOf(today.getTime().getSeconds());
     }
-
 
     /*--------------------Fin de los metodos----------------------------------*/
     public static void main(String args[]) {
