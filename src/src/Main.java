@@ -8,14 +8,14 @@ import java.awt.*;
 public class Main extends javax.swing.JFrame {
 
     static CardLayout cardLayout;
-    
+    static boolean successLogIn = false;
     GestionarAlmacen gestionarAlmacen = new GestionarAlmacen();
     GestionarVentas gestionarVentas = new GestionarVentas();
     
     private IngresoDialog ingreso;
     
     public Main() {
-        
+        new IngresoDialog(this, true);
         initComponents();
         //fjqnvu hruehiduvhas me duele el pito
         //pito
@@ -40,8 +40,7 @@ public class Main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         panelClientes = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        panelProveedores = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        panelProveedores = new GestionarProveedores();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Version 1.3");
@@ -173,26 +172,22 @@ public class Main extends javax.swing.JFrame {
 
         PanelCardLayout.add(panelClientes, "Clientes");
 
-        jLabel3.setText("Panel Proveedores, borrar este label");
-
         javax.swing.GroupLayout panelProveedoresLayout = new javax.swing.GroupLayout(panelProveedores);
         panelProveedores.setLayout(panelProveedoresLayout);
         panelProveedoresLayout.setHorizontalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProveedoresLayout.createSequentialGroup()
-                .addGap(325, 325, 325)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(902, Short.MAX_VALUE))
+            .addGap(0, 1450, Short.MAX_VALUE)
         );
         panelProveedoresLayout.setVerticalGroup(
             panelProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProveedoresLayout.createSequentialGroup()
-                .addGap(237, 237, 237)
-                .addComponent(jLabel3)
-                .addContainerGap(441, Short.MAX_VALUE))
+            .addGap(0, 694, Short.MAX_VALUE)
         );
 
+        /*
+
         PanelCardLayout.add(panelProveedores, "Proveedores");
+        */
+        PanelCardLayout.add(new GestionarProveedores(), "Proveedores");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,6 +284,9 @@ public class Main extends javax.swing.JFrame {
                + String.valueOf(today.getTime().getSeconds());
     }
 
+    public static void terminarPrograma(){
+        System.exit(0);
+    }
     /*--------------------Fin de los metodos----------------------------------*/
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

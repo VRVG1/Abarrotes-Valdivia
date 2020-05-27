@@ -156,7 +156,7 @@ public class IngresoDialog extends javax.swing.JDialog {
         String inputFieldUser = fieldUser.getText();
         String inputFieldPass = String.valueOf(fieldPass.getPassword());
         if(inputFieldUser.equals(user) && inputFieldPass.equals(password)){
-            Main.succesLogIn = true;
+            Main.successLogIn = true;
             this.dispose();
         }else{
             fieldUser.setBorder(new BasicBorders.FieldBorder(Color.RED, Color.RED, Color.RED, Color.RED));
